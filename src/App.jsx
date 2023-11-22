@@ -1,13 +1,25 @@
 import React from 'react';
-import CatalogoPizzas from './CatalagoPizzas';
+import Home from './Home';
 import { PizzaProvider } from './PizzaContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import PizzaDetalle from './PizzaDetalle';
+import { Routes, Route } from "react-router-dom";
+import Navbar from './Navbar';
 
 const App = () => {
   return (
     <PizzaProvider>
       <div>
-        <CatalogoPizzas />
+      <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
+            path="/pizza/:id"
+            element={<PizzaDetalle />}
+          />
+        </Routes>
       </div>
     </PizzaProvider>
   );

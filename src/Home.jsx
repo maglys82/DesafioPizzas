@@ -1,50 +1,50 @@
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react';
-import Container from 'react-bootstrap/Container';
+import { Card, ListGroup } from 'react-bootstrap';
+import { usePizzaContext } from './PizzaContext';
+import { useNavigate } from "react-router-dom";
 
 
-function Home() {
-    const containerStyle = {
-        backgroundImage: 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx2lusOv7WiqA6gWpAaNeaLL643msahqWg0A&usqp=CAU")',
-        backgroundSize: 'cover',
-        width: '100%',
-        height: '200px',
-        marginBottom: '20px',
-
-    };
-    const titleStyle = {
-        fontSize: '40px',
-        color: 'white',
-        margin: '20px', 
-        padding: '10px',
-      };
-    
-    
-
+const Home = () => {
+    const { pizzas, addToCart } = usePizzaContext();
+    const navigate = useNavigate();
+    const verMas = (pizzaID) =>{
+        navigate(`/pizza/${pizzaID}`) 
+    }
     return (
-        <>
-            <div>
-                <Navbar bg="primary" data-bs-theme="dark">
-                    <Container>
-                        <Nav>
-                            <Nav.Link  className="text-white" >🍕Pizza Mamma Mia!!</Nav.Link>
-                            <Nav.Link  className="text-white">$</Nav.Link>
-                        </Nav>
-                    </Container>
-                </Navbar>
-            </div>
-            <div style={containerStyle}>
-                <h1 style={titleStyle }>¡Pizzeria Mamma Mia!</h1>
-                <h5>¡Tenemos las Mejores Pizzas que podras Encontrar!</h5>
-            </div>
+        <div className="text-center text-white">
+            <div className="row ">
+                {pizzas.map((pizza) => (
+                    <div key={pizza.id} className="col-md-2 mb-4">
+                        <Card className=''>
+                            <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
+                            <Card.Body>
+                                <Card.Title>{pizza.name}</Card.Title>
+                            </Card.Body >
+                            <ListGroup className="list-group-flush">
 
-            <div>
-
+                                <ListGroup.Item  style={{ textAlign: 'left' , fontWeight: 'bold'}} >Ingredientes:
+                                    <ul className="list-unstyled" style={{ fontWeight: 'normal' }}>
+                                        {pizza.ingredients.map((ingredient, index) => (
+                                            <li style={{ display: 'flex', justifyContent: 'start'}} key={index}>🍕{ingredient}</li>
+                                        ))}
+                                    </ul>
+                                </ListGroup.Item>
+                                <ListGroup.Item style={{fontSize: '20px', fontWeight: 'bold' }}>${pizza.price.toFixed(0)}</ListGroup.Item>
+                            </ListGroup>
+                            <Card.Body style={{ display: 'flex', justifyContent: 'space-between'}}>
+                                <button onClick={() => verMas(pizza.id)} className="btn btn-primary">
+                                    Ver mas
+                                </button>
+                                <button onClick={() => addToCart(pizza)} className="btn btn-danger">
+                                    Añadir
+                                </button>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                ))}
             </div>
-        </>
+        </div>
     );
-}
+};
 
 export default Home;
