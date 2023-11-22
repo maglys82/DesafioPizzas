@@ -4,6 +4,7 @@ import { PizzaProvider } from './PizzaContext';
 import PizzaDetalle from './PizzaDetalle';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './Navbar';
+import CarritoCompras from './CarritoCompras';
 
 const App = () => {
   return (
@@ -18,6 +19,11 @@ const App = () => {
           <Route
             path="/pizza/:id"
             element={<PizzaDetalle />}
+          />
+        
+        <Route
+            path="/carrito/"
+            element={<CarritoCompras />}
           />
         </Routes>
       </div>

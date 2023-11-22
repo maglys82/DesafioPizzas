@@ -2,31 +2,55 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React from 'react';
 import Container from 'react-bootstrap/Container';
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 
-function Navegador() {
+
+const Navegador = () => {
+    const setActiveClass = ({ isActive }) => (isActive ? "active" : undefined);
     const containerStyle = {
         backgroundImage: 'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx2lusOv7WiqA6gWpAaNeaLL643msahqWg0A&usqp=CAU")',
         backgroundSize: 'cover',
         width: '100%',
         height: '200px',
         marginBottom: '20px',
-        textAlign:"center"
+        textAlign: "center"
     };
     const titleStyle = {
         fontSize: '40px',
         color: 'white',
         padding: '10px',
-      };
+    };
+
     
+
     return (
         <>
             <div>
                 <Navbar bg="primary" data-bs-theme="dark">
                     <Container>
                         <Nav>
-                            <Nav.Link  className="text-white" >🍕Pizza Mamma Mia!!</Nav.Link>
-                            <Nav.Link  className="text-white">$</Nav.Link>
+                            <NavLink className={setActiveClass}
+                                to="/"
+                            >
+                                🍕Pizzeria Mamma Mia!!
+
+                            </NavLink >
+
+                            <NavLink className={setActiveClass}
+                                to="/pizza"
+                            >
+                            </NavLink>
+                            
+                            <NavLink className={setActiveClass}
+                                    to="/carrito">
+
+                                <FontAwesomeIcon icon={faShoppingCart} />
+
+                            </NavLink>
+                            
                         </Nav>
                     </Container>
                 </Navbar>

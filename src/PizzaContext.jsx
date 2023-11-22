@@ -7,7 +7,6 @@ export const usePizzaContext = () => {
 };
 
 export const PizzaProvider = ({ children }) => {
-  const [carrito, setCarrito] = useState([])
   const [pizzas, setPizzas] = useState([
     {
       "desc": "La pizza napolitana, de masa tierna y delgada pero bordes altos, es la versión propia de la cocina napolitana de la pizza redonda. El término pizza napoletana, por su importancia histórica o regional, se emplea en algunas zonas como sinónimo de pizza tonda.",
@@ -59,12 +58,18 @@ export const PizzaProvider = ({ children }) => {
       }
   ]);
 
-  const addToCart = (pizza) => {
-    setCarrito(pizza)
-  };
+  
+  const [carrito] = useState([])
 
+  const addToCarrito = (pizza)=>{
+    carrito.push(pizza)
+  }
+
+  const removeFromCart = (pizzaId) => {
+    setCarrito((prevCarrito) => prevCarrito.filter((pizza) => pizza.id !== pizzaId));
+  };
   return (
-    <PizzaContext.Provider value={{ pizzas,carrito, addToCart }}>
+    <PizzaContext.Provider value={{ pizzas, carrito, addToCarrito }}>
       {children}
     </PizzaContext.Provider>
   );

@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 
 function PizzaDetalle() {
     const { id } = useParams();
-    const { pizzas } = usePizzaContext();
+    const { pizzas, addToCarrito } = usePizzaContext();
     const result = pizzas.filter((pizza) => id == pizza.id);
     const pizza = result[0];
     return (
@@ -26,7 +26,7 @@ function PizzaDetalle() {
                                 <li style={{ display: 'flex', justifyContent: 'start' }} key={index}>🍕{ingredient}</li>
                             ))}
                         </ul>
-                        <Button variant="primary">Añadir</Button>
+                        <Button onClick={()=>{addToCarrito(pizza)}} variant="primary">Añadir</Button>
                     </Card.Body>
                 </Card>
         </Container>

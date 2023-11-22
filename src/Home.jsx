@@ -2,10 +2,11 @@ import React from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 import { usePizzaContext } from './PizzaContext';
 import { useNavigate } from "react-router-dom";
+import CarritoCompras from './CarritoCompras';
 
 
 const Home = () => {
-    const { pizzas, addToCart } = usePizzaContext();
+    const { pizzas, addToCarrito } = usePizzaContext();
     const navigate = useNavigate();
     const verMas = (pizzaID) =>{
         navigate(`/pizza/${pizzaID}`) 
@@ -35,7 +36,7 @@ const Home = () => {
                                 <button onClick={() => verMas(pizza.id)} className="btn btn-primary">
                                     Ver mas
                                 </button>
-                                <button onClick={() => addToCart(pizza)} className="btn btn-danger">
+                                <button onClick={() => addToCarrito(pizza)} className="btn btn-danger">
                                     Añadir
                                 </button>
                             </Card.Body>
